@@ -1,11 +1,11 @@
+import 'dart:async';
+import 'dart:html';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
-}
+import 'package:flutter_app_aimbooster/result.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -14,19 +14,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool create = true;
+  List<Widget> balls = [];
+  ListGenerator? generator;
+  int counter = 0;
+  int hits = 0;
+  int misses = 0;
 
   void _myFunction() {
+    hits++;
     setState(() {
       balls = generator!.getBallList();
     });
   }
 
-  double positionLeft1 = 200;
-  double positionTop1 = 50;
-  List<Widget> balls = [];
-  ListGenerator? generator;
-
-  final AppBar appBar = AppBar(
+  AppBar appBar = AppBar(
     centerTitle: true,
     title: Text('Aim Booster'),
   );
@@ -43,6 +44,19 @@ class _MyAppState extends State<MyApp> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     if (create) {
+      Timer.periodic(Duration(seconds: 1), (t) {
+        print(t.tick);
+        if (t.tick == 10) {
+          t.cancel();
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (c) => ResultPage(
+                        hits: hits,
+                        misses: misses,
+                      )));
+        }
+      });
       generator = ListGenerator(
           count: 3,
           setState: _myFunction,
@@ -51,55 +65,25 @@ class _MyAppState extends State<MyApp> {
       balls = generator!.getBallList();
       create = false;
     }
+    // balls.add(Text(('mamad')));
+    appBar = AppBar(
+      centerTitle: true,
+      title: Text('Misses : $misses, Hits : $hits'),
+    );
 
     // TODO: implement build
     return GestureDetector(
-      onTap: () {
-        print('wrong on tapped');
-      },
-      onTapDown: (e){
-        print('wrong on tap down!');
+      onTapDown: (e) {
+        setState(() {
+          misses++;
+          print('wrong on tap down!');
+        });
       },
       child: Scaffold(
         appBar: appBar,
         body: Stack(
           fit: StackFit.expand,
-          children:
-              // [
-              balls,
-          //   Positioned(
-          //       left: 0,
-          //       top: height-100,
-          //       child: ClipOval(
-          //         child: Material(
-          //           color: Colors.blue, // Button color
-          //           child: InkWell(
-          //             splashColor: Colors.red, // Splash color
-          //             onTap: () {
-          //               print('width is : $width');
-          //               print('height is : $height');
-          //             },
-          //             child: SizedBox(width: 100, height: 100),
-          //           ),
-          //         ),
-          //       )),
-          //   Positioned(
-          //       left: width-100,
-          //       top: 400,
-          //       child: ClipOval(
-          //         child: Material(
-          //           color: Colors.blue, // Button color
-          //           child: InkWell(
-          //             splashColor: Colors.red, // Splash color
-          //             onTap: () {
-          //               print('width is : $width');
-          //               print('height is : $height');
-          //             },
-          //             child: SizedBox(width: 100, height: 100),
-          //           ),
-          //         ),
-          //       )),
-          // ],
+          children: balls,
         ),
       ),
     );
@@ -144,23 +128,21 @@ class ListGenerator {
               child: Material(
                 color: Colors.lightBlue, // Button color
                 child: InkWell(
-                  splashColor: Colors.lightBlue,
-                  // Splash color
-                  onTapDown: (TapDownDetails e) {
-                    tops[i] = Random()
-                        .nextInt((screenHeight - ballHeight).toInt())
-                        .toDouble();
-                    lefts[i] = Random()
-                        .nextInt((screenWidth - ballWidth).toInt())
-                        .toDouble();
-                    setState();
-                  },
-                  onTap: () {},
-                  onHover: (e) {
-                    print('hovered');
-                  },
-                  child: SizedBox(width: ballHeight, height: ballWidth),
-                ),
+                    splashColor: Colors.lightBlue,
+                    // Splash color
+                    onTapDown: (TapDownDetails e) {
+                      tops[i] = Random()
+                          .nextInt((screenHeight - ballHeight).toInt())
+                          .toDouble();
+                      lefts[i] = Random()
+                          .nextInt((screenWidth - ballWidth).toInt())
+                          .toDouble();
+                      setState();
+                    },
+                    onTap: () {},
+                    child: GestureDetector(
+                      child: SizedBox(width: ballHeight, height: ballWidth),
+                    )),
               ),
             )),
       );
