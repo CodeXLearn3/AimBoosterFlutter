@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-  -->
-  <base href="/">
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    -->
+    <base href="/">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter application.">
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter application.">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="flutter_app_aimbooster">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="flutter_app_aimbooster">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <title>flutter_app_aimbooster</title>
-  <link rel="manifest" href="AimBoosterFlutter/play/manifest.json">
+    <title>flutter_app_aimbooster</title>
+    <link rel="manifest" href="AimBoosterFlutter/play/manifest.json">
 </head>
 <body>
-<h6>Please Wait, It May Take Several Minuets To Install For The First Time</h6>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
+<div style="height: 400px;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;">
+    <h1>Please Wait, It May Take Several Minuets To Install For The First Time</h1>
+</div>
+<!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
+<script>
     var serviceWorkerVersion = '2196726065';
     var scriptLoaded = false;
     function loadMainDartJs() {
@@ -94,6 +101,8 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
-  </script>
+
+
+</script>
 </body>
 </html>
