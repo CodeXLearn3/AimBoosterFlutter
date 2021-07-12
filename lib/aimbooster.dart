@@ -139,9 +139,8 @@ class ListGenerator {
             top: tops.elementAt(i),
             child: ClipOval(
               child: Material(
-                color: Colors.lightBlue, // Button color
+                color: ballColor, // Button color
                 child: InkWell(
-                  splashColor: Colors.lightBlue,
                   // Splash color
                   onTapDown: (TapDownDetails e) {
                     tops[i] = Random()
