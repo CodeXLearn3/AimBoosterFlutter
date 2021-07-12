@@ -1,152 +1,145 @@
-import 'dart:async';
-import 'dart:html';
-import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:flutter_app_aimbooster/aimbooster.dart';
 
-import 'package:flutter_app_aimbooster/result.dart';
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
+void main() {
+  runApp(MaterialApp(
+    home: MenuPage(),
+  ));
 }
 
-class _MyAppState extends State<MyApp> {
-  bool create = true;
-  List<Widget> balls = [];
-  ListGenerator? generator;
-  int counter = 0;
-  int hits = 0;
-  int misses = 0;
-
-  void _myFunction() {
-    hits++;
-    setState(() {
-      balls = generator!.getBallList();
-    });
-  }
-
-  AppBar appBar = AppBar(
-    centerTitle: true,
-    title: Text('Aim Booster'),
-  );
-
+class MenuPage extends StatefulWidget {
   @override
-  void initState() {
-    super.initState();
-  }
+  _MenuPageState createState() => _MenuPageState();
+}
+
+class _MenuPageState extends State<MenuPage> {
+  double ballSize = 75;
+  double ballColorValue = 0;
+  double ballCount = 3;
+  Color ballColor = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight =
-        MediaQuery.of(context).size.height - appBar.preferredSize.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    if (create) {
-      Timer.periodic(Duration(seconds: 1), (t) {
-        print(t.tick);
-        if (t.tick == 10) {
-          t.cancel();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (c) => ResultPage(
-                        hits: hits,
-                        misses: misses,
-                      )));
-        }
-      });
-      generator = ListGenerator(
-          count: 3,
-          setState: _myFunction,
-          screenHeight: screenHeight,
-          screenWidth: screenWidth);
-      balls = generator!.getBallList();
-      create = false;
-    }
-    // balls.add(Text(('mamad')));
-    appBar = AppBar(
-      centerTitle: true,
-      title: Text('Misses : $misses, Hits : $hits'),
-    );
-
     // TODO: implement build
-    return GestureDetector(
-      onTapDown: (e) {
-        setState(() {
-          misses++;
-          print('wrong on tap down!');
-        });
-      },
-      child: Scaffold(
-        appBar: appBar,
-        body: Stack(
-          fit: StackFit.expand,
-          children: balls,
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Aim Booster - Menu'),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(200, 100, 200, 0),
+          child: Column(
+            children: [
+              Text(
+                'Ball Size',
+                style: TextStyle(fontSize: 20),
+              ),
+              Slider(
+                value: ballSize,
+                onChanged: (newBallSize) {
+                  setState(() {
+                    ballSize = newBallSize;
+                  });
+                },
+                min: 50,
+                max: 100,
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                'Ball Color',
+                style: TextStyle(fontSize: 20),
+              ),
+              Slider(
+                value: ballColorValue,
+                onChanged: (newBallColor) {
+                  setState(() {
+                    ballColorValue = newBallColor;
+                    switch (ballColorValue.toInt()) {
+                      case (0):
+                        ballColor = Colors.blue;
+                        break;
+                      case (1):
+                        ballColor = Colors.pinkAccent;
+                        break;
+                      case (2):
+                        ballColor = Colors.green;
+                        break;
+                    }
+                  });
+                },
+                activeColor: ballColor,
+                divisions: 2,
+                min: 0,
+                max: 2,
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                'Ball Count',
+                style: TextStyle(fontSize: 20),
+              ),
+              Slider(
+                value: ballCount,
+                onChanged: (newBallCount) {
+                  setState(() {
+                    ballCount = newBallCount;
+                  });
+                },
+                divisions: 4,
+                label: '${ballCount.toInt()}',
+                min: 1,
+                max: 5,
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (c) {
+                      return MyApp(ballCount: ballCount.toInt(),ballSize: ballSize, ballColor: ballColor,);
+                    }));
+                  },
+                  child: Text(
+                    'Start',
+                    style: TextStyle(fontSize: 20),
+                  )),
+              SizedBox(
+                height: 50,
+              ),
+              Divider(
+                height: 10,
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                'Preview',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    fontStyle: FontStyle.italic),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              ClipOval(
+                child: Material(
+                  color: ballColor, // Button color
+                  child: InkWell(
+                      child: GestureDetector(
+                    child: SizedBox(width: ballSize, height: ballSize),
+                  )),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
-  }
-}
-
-class ListGenerator {
-  int count;
-  double screenWidth;
-  double screenHeight;
-  double ballWidth;
-  double ballHeight;
-  late final List<double> tops;
-  late final List<double> lefts;
-  Function setState;
-
-  ListGenerator(
-      {this.count = 1,
-      this.ballWidth = 75,
-      this.ballHeight = 75,
-      required this.setState,
-      required this.screenHeight,
-      required this.screenWidth}) {
-    tops = [];
-    lefts = [];
-    for (int i = 0; i < count; i++) {
-      tops.add(
-          Random().nextInt((screenHeight - ballHeight).toInt()).toDouble());
-      lefts.add(Random().nextInt((screenWidth - ballWidth).toInt()).toDouble());
-    }
-  }
-
-  List<Widget> getBallList() {
-    List<Widget> balls = [];
-    for (int i = 0; i < count; i++) {
-      balls.add(
-        Positioned(
-            key: ObjectKey(i),
-            left: lefts.elementAt(i),
-            top: tops.elementAt(i),
-            child: ClipOval(
-              child: Material(
-                color: Colors.lightBlue, // Button color
-                child: InkWell(
-                    splashColor: Colors.lightBlue,
-                    // Splash color
-                    onTapDown: (TapDownDetails e) {
-                      tops[i] = Random()
-                          .nextInt((screenHeight - ballHeight).toInt())
-                          .toDouble();
-                      lefts[i] = Random()
-                          .nextInt((screenWidth - ballWidth).toInt())
-                          .toDouble();
-                      setState();
-                    },
-                    onTap: () {},
-                    child: GestureDetector(
-                      child: SizedBox(width: ballHeight, height: ballWidth),
-                    )),
-              ),
-            )),
-      );
-    }
-    return balls;
   }
 }
