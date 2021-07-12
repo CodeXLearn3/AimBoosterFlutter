@@ -14,7 +14,7 @@ class ResultPage extends StatelessWidget {
           centerTitle: true,
           title: Text('Results are :'),
         ),
-        body: Center(child: Text('Your hit ratio is ${ hits.toDouble() / (misses + hits)}', style: TextStyle(fontSize: 30),),),
+        body: Center(child: Text('Your Score is : ${hits*200 -  misses*50}', style: TextStyle(fontSize: 30),),),
     );
   }
 }

@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
   int counter = 0;
   int hits = 0;
   int misses = 0;
+  int tick = 0;
 
   void _myFunction() {
     hits++;
@@ -54,8 +55,10 @@ class _MyAppState extends State<MyApp> {
 
     if (create) {
       Timer.periodic(Duration(seconds: 1), (t) async {
-        print(t.tick);
-        if (t.tick == 10) {
+        setState(() {
+          tick = t.tick;
+        });
+        if (t.tick == 60) {
           t.cancel();
           await Navigator.push(
               context,
@@ -79,7 +82,7 @@ class _MyAppState extends State<MyApp> {
     }
     appBar = AppBar(
       centerTitle: true,
-      title: Text('Misses : $misses, Hits : $hits'),
+      title: Text('Your Score is : ${hits*200 -  misses*50}, Time Remaining : ${60 - tick}'),
     );
 
     // TODO: implement build

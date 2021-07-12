@@ -32,9 +32,18 @@ class _MenuPageState extends State<MenuPage> {
           padding: EdgeInsets.fromLTRB(200, 100, 200, 0),
           child: Column(
             children: [
-              Text(
-                'Ball Size',
-                style: TextStyle(fontSize: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Ball Size',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    '  (Preferred 75)',
+                    style: TextStyle(fontSize: 13,fontStyle: FontStyle.italic),
+                  ),
+                ],
               ),
               Slider(
                 value: ballSize,
@@ -43,6 +52,8 @@ class _MenuPageState extends State<MenuPage> {
                     ballSize = newBallSize;
                   });
                 },
+                divisions: 4,
+                label: '$ballSize',
                 min: 50,
                 max: 100,
               ),
@@ -79,9 +90,18 @@ class _MenuPageState extends State<MenuPage> {
               SizedBox(
                 height: 50,
               ),
-              Text(
-                'Ball Count',
-                style: TextStyle(fontSize: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Ball Count',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    '  (Preferred 3)',
+                    style: TextStyle(fontSize: 13,fontStyle: FontStyle.italic),
+                  ),
+                ],
               ),
               Slider(
                 value: ballCount,
@@ -136,6 +156,14 @@ class _MenuPageState extends State<MenuPage> {
                   )),
                 ),
               ),
+              SizedBox(
+                height: 25,
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Text('Saman719',style: TextStyle(color: Color.fromRGBO(
+                  167, 165, 165, 1.0)),)
             ],
           ),
         ),
