@@ -3,30 +3,30 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "2efbb41d7877d10aac9d091f58ccd7b9",
-"assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
-"assets/NOTICES": "a343d01e8cc8e460d0526fb92f70b5f9",
-"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
+  "AimBoosterFlutter/play/assets/AssetManifest.json": "2efbb41d7877d10aac9d091f58ccd7b9",
+"AimBoosterFlutter/play/assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
+"AimBoosterFlutter/play/assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
+"AimBoosterFlutter/play/assets/NOTICES": "a343d01e8cc8e460d0526fb92f70b5f9",
+"AimBoosterFlutter/play/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "5ed5afbb11028a4697ff9736ebae1a90",
-"/": "5ed5afbb11028a4697ff9736ebae1a90",
-"AimBoosterFlutter/play/main.dart.js": "1d667afa0677bf4eadfd5920adf37f50",
-"manifest.json": "100e84e3d38fd1e344d4c0b13baa5f68",
-"version.json": "c3904b9d9e10851060808dd387c7101e"
+"index.html": "261c002e0f502c9a09fe8a228d81a5fb",
+"/": "261c002e0f502c9a09fe8a228d81a5fb",
+"AimBoosterFlutter/play/main.dart.js": "02e3ff12c211748ab2258bcc086d653c",
+"AimBoosterFlutter/play/manifest.json": "100e84e3d38fd1e344d4c0b13baa5f68",
+"AimBoosterFlutter/play/version.json": "c3904b9d9e10851060808dd387c7101e"
 };
 
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = [
   "/",
-"AimBoosterFlutter/play/main.dart.js",
+"main.dart.js",
 "index.html",
 "assets/NOTICES",
-"assets/AssetManifest.json",
-"assets/FontManifest.json"];
+"AimBoosterFlutter/play/assets/AssetManifest.json",
+"AimBoosterFlutter/play/assets/FontManifest.json"];
 // During install, the TEMP cache is populated with the application shell files.
 self.addEventListener("install", (event) => {
   self.skipWaiting();
