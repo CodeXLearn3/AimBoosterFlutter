@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MaterialApp(
@@ -12,6 +13,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool create = true;
+
   void _myFunction() {
     setState(() {
       balls = generator!.getBallList();
@@ -30,57 +33,74 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    generator = ListGenerator(count: 3, setState: _myFunction);
-    balls = generator!.getBallList();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    double height =
+    double screenHeight =
         MediaQuery.of(context).size.height - appBar.preferredSize.height;
-    double width = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    if (create) {
+      generator = ListGenerator(
+          count: 3,
+          setState: _myFunction,
+          screenHeight: screenHeight,
+          screenWidth: screenWidth);
+      balls = generator!.getBallList();
+      create = false;
+    }
+
     // TODO: implement build
-    return Scaffold(
-      appBar: appBar,
-      body: Stack(
-        fit: StackFit.expand,
-        children:
-            // [
-            balls,
-        //   Positioned(
-        //       left: 0,
-        //       top: height-100,
-        //       child: ClipOval(
-        //         child: Material(
-        //           color: Colors.blue, // Button color
-        //           child: InkWell(
-        //             splashColor: Colors.red, // Splash color
-        //             onTap: () {
-        //               print('width is : $width');
-        //               print('height is : $height');
-        //             },
-        //             child: SizedBox(width: 100, height: 100),
-        //           ),
-        //         ),
-        //       )),
-        //   Positioned(
-        //       left: width-100,
-        //       top: 400,
-        //       child: ClipOval(
-        //         child: Material(
-        //           color: Colors.blue, // Button color
-        //           child: InkWell(
-        //             splashColor: Colors.red, // Splash color
-        //             onTap: () {
-        //               print('width is : $width');
-        //               print('height is : $height');
-        //             },
-        //             child: SizedBox(width: 100, height: 100),
-        //           ),
-        //         ),
-        //       )),
-        // ],
+    return GestureDetector(
+      onTap: () {
+        print('wrong on tapped');
+      },
+      onTapDown: (e){
+        print('wrong on tap down!');
+      },
+      child: Scaffold(
+        appBar: appBar,
+        body: Stack(
+          fit: StackFit.expand,
+          children:
+              // [
+              balls,
+          //   Positioned(
+          //       left: 0,
+          //       top: height-100,
+          //       child: ClipOval(
+          //         child: Material(
+          //           color: Colors.blue, // Button color
+          //           child: InkWell(
+          //             splashColor: Colors.red, // Splash color
+          //             onTap: () {
+          //               print('width is : $width');
+          //               print('height is : $height');
+          //             },
+          //             child: SizedBox(width: 100, height: 100),
+          //           ),
+          //         ),
+          //       )),
+          //   Positioned(
+          //       left: width-100,
+          //       top: 400,
+          //       child: ClipOval(
+          //         child: Material(
+          //           color: Colors.blue, // Button color
+          //           child: InkWell(
+          //             splashColor: Colors.red, // Splash color
+          //             onTap: () {
+          //               print('width is : $width');
+          //               print('height is : $height');
+          //             },
+          //             child: SizedBox(width: 100, height: 100),
+          //           ),
+          //         ),
+          //       )),
+          // ],
+        ),
       ),
     );
   }
@@ -88,19 +108,29 @@ class _MyAppState extends State<MyApp> {
 
 class ListGenerator {
   int count;
+  double screenWidth;
+  double screenHeight;
   double ballWidth;
   double ballHeight;
-  final List<double> tops = [0, 0, 0];
-  final List<double> lefts = [0, 100, 200];
-  double top = 0;
-  double left = 0;
+  late final List<double> tops;
+  late final List<double> lefts;
   Function setState;
 
   ListGenerator(
       {this.count = 1,
-      this.ballWidth = 50,
-      this.ballHeight = 50,
-      required this.setState});
+      this.ballWidth = 75,
+      this.ballHeight = 75,
+      required this.setState,
+      required this.screenHeight,
+      required this.screenWidth}) {
+    tops = [];
+    lefts = [];
+    for (int i = 0; i < count; i++) {
+      tops.add(
+          Random().nextInt((screenHeight - ballHeight).toInt()).toDouble());
+      lefts.add(Random().nextInt((screenWidth - ballWidth).toInt()).toDouble());
+    }
+  }
 
   List<Widget> getBallList() {
     List<Widget> balls = [];
@@ -112,16 +142,22 @@ class ListGenerator {
             top: tops.elementAt(i),
             child: ClipOval(
               child: Material(
-                color: Color.fromRGBO(100, 0, i * 60, 1), // Button color
+                color: Colors.lightBlue, // Button color
                 child: InkWell(
-                  splashColor: Color.fromRGBO(256, 256, i * 10, 1),
+                  splashColor: Colors.lightBlue,
                   // Splash color
                   onTapDown: (TapDownDetails e) {
-                    print(e.localPosition);
-                    tops[i] = tops.elementAt(i) + 100;
+                    tops[i] = Random()
+                        .nextInt((screenHeight - ballHeight).toInt())
+                        .toDouble();
+                    lefts[i] = Random()
+                        .nextInt((screenWidth - ballWidth).toInt())
+                        .toDouble();
                     setState();
                   },
-                  onTap: () {
+                  onTap: () {},
+                  onHover: (e) {
+                    print('hovered');
                   },
                   child: SizedBox(width: ballHeight, height: ballWidth),
                 ),
