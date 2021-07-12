@@ -16622,7 +16622,7 @@ qK:function(a){var s
 if(P.a98(a).gEQ())return P.IE(C.eJ,a,C.Z,!1)
 s=this.gNN()
 if(s==null)s=""
-return P.IE(C.eJ,s+("assets/"+a),C.Z,!1)},
+return P.IE(C.eJ,s+("AimBoosterFlutter/play/assets/"+a),C.Z,!1)},
 cN:function(a,b){return this.YE(a,b)},
 YE:function(a,b){var s=0,r=P.a7(t.B6),q,p=2,o,n=[],m=this,l,k,j,i,h,g,f,e
 var $async$cN=P.a3(function(c,d){if(c===1){o=d
@@ -17897,7 +17897,7 @@ var $async$h2=P.a3(function(a2,a3){if(a2===1){o=a3
 s=p}while(true)switch(s){case 0:a=null
 p=4
 s=7
-return P.a9(a1.cN(0,"AimBoosterFlutter/play/FontManifest.json"),$async$h2)
+return P.a9(a1.cN(0,"FontManifest.json"),$async$h2)
 case 7:a=a3
 p=2
 s=6
@@ -24088,7 +24088,7 @@ var $async$h2=P.a3(function(a5,a6){if(a5===1){o=a6
 s=p}while(true)switch(s){case 0:a2=null
 p=4
 s=7
-return P.a9(a4.cN(0,"AimBoosterFlutter/play/FontManifest.json"),$async$h2)
+return P.a9(a4.cN(0,"FontManifest.json"),$async$h2)
 case 7:a2=a6
 p=2
 s=6
