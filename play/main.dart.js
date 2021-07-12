@@ -17897,7 +17897,7 @@ var $async$h2=P.a3(function(a2,a3){if(a2===1){o=a3
 s=p}while(true)switch(s){case 0:a=null
 p=4
 s=7
-return P.a9(a1.cN(0,"FontManifest.json"),$async$h2)
+return P.a9(a1.cN(0,"AimBoosterFlutter/play/FontManifest.json"),$async$h2)
 case 7:a=a3
 p=2
 s=6
@@ -24088,7 +24088,7 @@ var $async$h2=P.a3(function(a5,a6){if(a5===1){o=a6
 s=p}while(true)switch(s){case 0:a2=null
 p=4
 s=7
-return P.a9(a4.cN(0,"FontManifest.json"),$async$h2)
+return P.a9(a4.cN(0,"AimBoosterFlutter/play/FontManifest.json"),$async$h2)
 case 7:a2=a6
 p=2
 s=6
