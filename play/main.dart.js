@@ -15802,7 +15802,7 @@ p4:function(a){var s
 if(P.a5W(a).gBF())return P.GS(C.el,a,C.L,!1)
 s=this.gJL()
 if(s==null)s=""
-return P.GS(C.el,s+("assets/"+a),C.L,!1)},
+return P.GS(C.el,s+("AimBoosterFlutter/play/assets/"+a),C.L,!1)},
 cw:function(a,b){return this.Tm(a,b)},
 Tm:function(a,b){var s=0,r=P.a7(t.B6),q,p=2,o,n=[],m=this,l,k,j,i,h,g,f,e
 var $async$cw=P.a3(function(c,d){if(c===1){o=d

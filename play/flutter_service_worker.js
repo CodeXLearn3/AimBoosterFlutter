@@ -13,7 +13,7 @@ const RESOURCES = {
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "index.html": "5ed5afbb11028a4697ff9736ebae1a90",
 "/": "5ed5afbb11028a4697ff9736ebae1a90",
-"main.dart.js": "1d667afa0677bf4eadfd5920adf37f50",
+"AimBoosterFlutter/play/main.dart.js": "1d667afa0677bf4eadfd5920adf37f50",
 "manifest.json": "100e84e3d38fd1e344d4c0b13baa5f68",
 "version.json": "c3904b9d9e10851060808dd387c7101e"
 };
@@ -22,7 +22,7 @@ const RESOURCES = {
 // start.
 const CORE = [
   "/",
-"main.dart.js",
+"AimBoosterFlutter/play/main.dart.js",
 "index.html",
 "assets/NOTICES",
 "assets/AssetManifest.json",
