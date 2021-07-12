@@ -14,7 +14,7 @@ const RESOURCES = {
 "index.html": "03704ef96f756822aa40ac42e72dff30",
 "/": "03704ef96f756822aa40ac42e72dff30",
 "main.dart.js": "3b1df1871a72775a284d7a3a72fc322a",
-"manifest.json": "100e84e3d38fd1e344d4c0b13baa5f68",
+"AimBoosterFlutter/manifest.json": "100e84e3d38fd1e344d4c0b13baa5f68",
 "version.json": "c3904b9d9e10851060808dd387c7101e"
 };
 
@@ -25,8 +25,8 @@ const CORE = [
 "main.dart.js",
 "index.html",
 "assets/NOTICES",
-"assets/AssetManifest.json",
-"assets/FontManifest.json"];
+"AimBoosterFlutter/assets/AssetManifest.json",
+"AimBoosterFlutter/assets/FontManifest.json"];
 // During install, the TEMP cache is populated with the application shell files.
 self.addEventListener("install", (event) => {
   self.skipWaiting();
